@@ -1,6 +1,9 @@
 var express = require('express');
 var cors = require('cors');
 require('dotenv').config()
+const multer = require('multer');
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage }) // not safe for large files.
 
 var app = express();
 
@@ -12,8 +15,8 @@ app.get('/', function (req, res) {
 });
 
 // upload endpoint
-app.post('/api/fileanalyse', (req, res) => {
-  res.json({hi: 'world'})
+app.post('/api/fileanalyse', upload.single('upfile'), (req, res) => {
+  res.json({name: req.file.originalname, type: req.file.mimetype, size: req.file.size});
 });
 
 
