@@ -11,6 +11,10 @@ app.get('/', function (req, res) {
     res.sendFile(process.cwd() + '/views/index.html');
 });
 
+// upload endpoint
+app.post('/api/fileanalyse', (req, res) => {
+  res.json({hi: 'world'})
+});
 
 
 
